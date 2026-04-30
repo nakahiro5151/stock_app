@@ -3554,59 +3554,81 @@ with tab8:
 
 @st.cache_data(ttl=600)
 def fetch_kabudragon_volume_ranking():
-    """株ドラゴンから出来高急増ランキングを取得"""
+    """株ドラゴンから出来高急増ランキングを取得（エラー詳細付き）"""
     import re as _re
     url = "https://www.kabudragon.com/ranking/dekizou.html"
-    try:
-        resp = requests.get(url, timeout=15, headers={"User-Agent": "Mozilla/5.0"})
-        resp.encoding = resp.apparent_encoding
-        if resp.status_code != 200:
-            return [], ""
-        soup = BeautifulSoup(resp.text, "html.parser")
-
-        date_str = ""
-        page_text = soup.get_text()
-        m = _re.search(r"\d{4}/\d{2}/\d{2}", page_text)
-        if m:
-            date_str = m.group()
-
-        rows = []
-        for table in soup.find_all("table"):
-            trs = table.find_all("tr")
-            if len(trs) < 3:
+    _headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "ja,en-US;q=0.7,en;q=0.3",
+    }
+    last_error = ""
+    # リトライ（最大2回）
+    for attempt in range(2):
+        try:
+            resp = requests.get(url, timeout=20, headers=_headers)
+            resp.encoding = resp.apparent_encoding
+            if resp.status_code != 200:
+                last_error = f"HTTP {resp.status_code}"
                 continue
-            for tr in trs:
-                tds = tr.find_all("td")
-                # 列数が10〜15の行のみ対象（ヘッダー行や結合セル行を除外）
-                if len(tds) < 10 or len(tds) > 20:
-                    continue
-                texts = [td.get_text(strip=True) for td in tds]
-                if not texts[0].isdigit():
-                    continue
-                try:
-                    # 列構成: 順位, コード, 名称, 市場, 日付, 取引値, 前日比, 前日比%, 急増率, 出来高, ...
-                    offset = 4
-                    if _re.match(r"^\d+/\d+", texts[offset]):
-                        offset = 5  # 日付列あり
-                    rows.append({
-                        "rank": texts[0],
-                        "code": texts[1],
-                        "name": texts[2],
-                        "market": texts[3],
-                        "price": texts[offset] if offset < len(texts) else "",
-                        "change": texts[offset+1] if offset+1 < len(texts) else "",
-                        "change_pct": texts[offset+2] if offset+2 < len(texts) else "",
-                        "vol_ratio": texts[offset+3] if offset+3 < len(texts) else "",
-                        "volume": texts[offset+4] if offset+4 < len(texts) else "",
-                    })
-                except IndexError:
-                    continue
-            if rows:
-                break
+            soup = BeautifulSoup(resp.text, "html.parser")
 
-        return rows[:50], date_str
-    except Exception:
-        return [], ""
+            date_str = ""
+            page_text = soup.get_text()
+            m = _re.search(r"\d{4}/\d{2}/\d{2}", page_text)
+            if m:
+                date_str = m.group()
+
+            rows = []
+            for table in soup.find_all("table"):
+                trs = table.find_all("tr")
+                if len(trs) < 3:
+                    continue
+                for tr in trs:
+                    tds = tr.find_all("td")
+                    # 列数が8以上の行を対象（サイト構造変更に柔軟対応）
+                    if len(tds) < 8 or len(tds) > 25:
+                        continue
+                    texts = [td.get_text(strip=True) for td in tds]
+                    if not texts[0].isdigit():
+                        continue
+                    try:
+                        # 列構成: 順位, コード, 名称, 市場, [日付], 取引値, 前日比, 前日比%, 急増率, 出来高, [高値, 安値]
+                        offset = 4
+                        if offset < len(texts) and _re.match(r"^\d+/\d+", texts[offset]):
+                            offset = 5  # 日付列あり
+                        rows.append({
+                            "rank": texts[0],
+                            "code": texts[1],
+                            "name": texts[2],
+                            "market": texts[3],
+                            "price": texts[offset] if offset < len(texts) else "",
+                            "change": texts[offset+1] if offset+1 < len(texts) else "",
+                            "change_pct": texts[offset+2] if offset+2 < len(texts) else "",
+                            "vol_ratio": texts[offset+3] if offset+3 < len(texts) else "",
+                            "volume": texts[offset+4] if offset+4 < len(texts) else "",
+                        })
+                    except (IndexError, ValueError):
+                        continue
+                if rows:
+                    break
+
+            if rows:
+                return rows[:50], date_str
+            else:
+                last_error = f"テーブル解析失敗（tables={len(soup.find_all('table'))}, content={len(resp.text)}bytes）"
+                continue
+        except requests.exceptions.Timeout:
+            last_error = "タイムアウト（20秒）"
+            continue
+        except requests.exceptions.ConnectionError as e:
+            last_error = f"接続エラー: {e}"
+            continue
+        except Exception as e:
+            last_error = f"{type(e).__name__}: {e}"
+            continue
+    # 全リトライ失敗時はエラーメッセージを返す
+    return [], last_error
 
 
 @st.cache_data(ttl=3600, show_spinner=False)
@@ -4027,7 +4049,11 @@ with tab9:
 
         st.caption("データ出典: [株ドラゴン](https://www.kabudragon.com/ranking/dekizou.html)")
     else:
-        st.warning("出来高急増ランキングの取得に失敗しました。")
+        err_detail = f"（{vol_date}）" if vol_date else ""
+        st.warning(f"出来高急増ランキングの取得に失敗しました。{err_detail}")
+        if vol_date:
+            st.code(vol_date, language=None)
+        st.info("💡 株ドラゴンのサイトが一時的にアクセスできない可能性があります。しばらく待ってからリロードしてください。")
 
 # =====================================================================
 # Tab 10: TOPIX新基準スクリーニング
