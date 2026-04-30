@@ -6046,6 +6046,17 @@ def _wl_fetch_fundamental(codes_tuple):
         cached = _edb_load(code)
         if cached is not None:
             return cached
+        # キャッシュになければ edinetdb.jp REST API から取得
+        try:
+            url = f"https://edinetdb.jp/api/v1/company/{code}"
+            resp = requests.get(url, timeout=15, headers={"User-Agent": "Mozilla/5.0"})
+            if resp.status_code == 200:
+                data = resp.json()
+                if data:
+                    _edb_save(code, data)
+                    return data
+        except Exception:
+            pass
         return None
 
     def _parse_edinetdb(code, edb):
