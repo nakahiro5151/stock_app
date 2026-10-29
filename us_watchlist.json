@@ -1,0 +1,92 @@
+{
+  "NVDA": {
+    "name": "NVIDIA Corporation",
+    "sector": "Semiconductor",
+    "added": "2026-05-07",
+    "notes": "AI/GPU leader"
+  },
+  "MSFT": {
+    "name": "Microsoft Corporation",
+    "sector": "Software",
+    "added": "2026-05-07",
+    "notes": "Cloud & AI platform"
+  },
+  "AAPL": {
+    "name": "Apple Inc.",
+    "sector": "Consumer Electronics",
+    "added": "2026-05-07",
+    "notes": "Ecosystem & Services"
+  },
+  "GOOGL": {
+    "name": "Alphabet Inc.",
+    "sector": "Internet/AI",
+    "added": "2026-05-07",
+    "notes": "Search & Cloud AI"
+  },
+  "AMZN": {
+    "name": "Amazon.com Inc.",
+    "sector": "E-Commerce/Cloud",
+    "added": "2026-05-07",
+    "notes": "AWS & AI infrastructure"
+  },
+  "META": {
+    "name": "Meta Platforms Inc.",
+    "sector": "Social Media/AI",
+    "added": "2026-05-07",
+    "notes": "AI & Metaverse"
+  },
+  "AVGO": {
+    "name": "Broadcom Inc.",
+    "sector": "Semiconductor",
+    "added": "2026-05-07",
+    "notes": "Custom AI chips & networking"
+  },
+  "TSM": {
+    "name": "Taiwan Semiconductor",
+    "sector": "Semiconductor",
+    "added": "2026-05-07",
+    "notes": "Advanced node foundry"
+  },
+  "AMD": {
+    "name": "Advanced Micro Devices",
+    "sector": "Semiconductor",
+    "added": "2026-05-07",
+    "notes": "GPU/CPU competitor"
+  },
+  "ASML": {
+    "name": "ASML Holding",
+    "sector": "Semiconductor Equipment",
+    "added": "2026-05-07",
+    "notes": "EUV lithography monopoly"
+  },
+  "ARM": {
+    "name": "Arm Holdings",
+    "sector": "Semiconductor IP",
+    "added": "2026-05-07",
+    "notes": "CPU architecture licensing"
+  },
+  "PLTR": {
+    "name": "Palantir Technologies",
+    "sector": "AI/Data Analytics",
+    "added": "2026-05-07",
+    "notes": "Enterprise AI platform"
+  },
+  "SNOW": {
+    "name": "Snowflake Inc.",
+    "sector": "Cloud Data",
+    "added": "2026-05-07",
+    "notes": "Data cloud platform"
+  },
+  "CRM": {
+    "name": "Salesforce Inc.",
+    "sector": "Enterprise SaaS",
+    "added": "2026-05-07",
+    "notes": "CRM & AI agents"
+  },
+  "UBER": {
+    "name": "Uber Technologies",
+    "sector": "Mobility/Delivery",
+    "added": "2026-05-07",
+    "notes": "Autonomous driving play"
+  }
+}

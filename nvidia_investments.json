@@ -1,0 +1,152 @@
+{
+  "description": "NVIDIAの投資先・出資先・買収先リスト（公開情報ベース）",
+  "last_updated": "2026-05-07",
+  "investments": [
+    {
+      "company": "CoreWeave",
+      "ticker": null,
+      "category": "Cloud/AI Infrastructure",
+      "type": "Investment",
+      "year": 2024,
+      "notes": "GPU cloud provider, NVIDIA invested in Series B & C rounds"
+    },
+    {
+      "company": "Applied Digital",
+      "ticker": "APLD",
+      "category": "Data Center/AI Infrastructure",
+      "type": "Investment",
+      "year": 2024,
+      "notes": "AI data center operator, NVIDIA invested $160M"
+    },
+    {
+      "company": "Recursion Pharmaceuticals",
+      "ticker": "RXRX",
+      "category": "AI Drug Discovery",
+      "type": "Investment",
+      "year": 2023,
+      "notes": "AI-powered drug discovery, $50M investment"
+    },
+    {
+      "company": "SoundHound AI",
+      "ticker": "SOUN",
+      "category": "Voice AI",
+      "type": "Investment",
+      "year": 2023,
+      "notes": "Conversational AI platform"
+    },
+    {
+      "company": "Arm Holdings",
+      "ticker": "ARM",
+      "category": "Semiconductor IP",
+      "type": "Strategic Partner/Investor",
+      "year": 2023,
+      "notes": "IPO anchor investor, CPU architecture partner"
+    },
+    {
+      "company": "Serve Robotics",
+      "ticker": "SERV",
+      "category": "Autonomous Delivery",
+      "type": "Investment",
+      "year": 2023,
+      "notes": "Autonomous delivery robots using NVIDIA Jetson"
+    },
+    {
+      "company": "Nano-X Imaging",
+      "ticker": "NNOX",
+      "category": "Medical Imaging AI",
+      "type": "Investment",
+      "year": 2022,
+      "notes": "AI-powered medical imaging"
+    },
+    {
+      "company": "TuSimple",
+      "ticker": null,
+      "category": "Autonomous Driving",
+      "type": "Investment",
+      "year": 2021,
+      "notes": "Autonomous trucking (delisted)"
+    },
+    {
+      "company": "Databricks",
+      "ticker": null,
+      "category": "Data/AI Platform",
+      "type": "Investment",
+      "year": 2024,
+      "notes": "Data lakehouse & AI platform, pre-IPO investment"
+    },
+    {
+      "company": "Hugging Face",
+      "ticker": null,
+      "category": "AI/ML Platform",
+      "type": "Investment",
+      "year": 2023,
+      "notes": "Open-source AI model hub"
+    },
+    {
+      "company": "Inflection AI",
+      "ticker": null,
+      "category": "Generative AI",
+      "type": "Investment",
+      "year": 2023,
+      "notes": "Personal AI assistant (Pi)"
+    },
+    {
+      "company": "Mistral AI",
+      "ticker": null,
+      "category": "Generative AI",
+      "type": "Investment",
+      "year": 2024,
+      "notes": "European open-source LLM company"
+    },
+    {
+      "company": "Wayve",
+      "ticker": null,
+      "category": "Autonomous Driving",
+      "type": "Investment",
+      "year": 2024,
+      "notes": "UK-based autonomous driving AI"
+    },
+    {
+      "company": "Perplexity AI",
+      "ticker": null,
+      "category": "AI Search",
+      "type": "Investment",
+      "year": 2024,
+      "notes": "AI-powered search engine"
+    },
+    {
+      "company": "Figure AI",
+      "ticker": null,
+      "category": "Humanoid Robotics",
+      "type": "Investment",
+      "year": 2024,
+      "notes": "Humanoid robot development"
+    },
+    {
+      "company": "Synthesia",
+      "ticker": null,
+      "category": "AI Video",
+      "type": "Investment",
+      "year": 2024,
+      "notes": "AI video generation platform"
+    },
+    {
+      "company": "WeRide",
+      "ticker": "WRD",
+      "category": "Autonomous Driving",
+      "type": "Investment",
+      "year": 2024,
+      "notes": "China-based autonomous driving"
+    },
+    {
+      "company": "Nebius Group",
+      "ticker": "NBIS",
+      "category": "AI Infrastructure",
+      "type": "Investment",
+      "year": 2024,
+      "notes": "AI infrastructure & cloud (ex-Yandex)"
+    }
+  ],
+  "related_etfs": ["SOXX", "SMH", "BOTZ", "ROBO", "AIQ", "ARKK", "ARKQ"],
+  "nvidia_ecosystem_tickers": ["NVDA", "ARM", "APLD", "RXRX", "SOUN", "SERV", "NNOX", "WRD", "NBIS", "TSM", "AVGO", "AMD", "SMCI", "DELL", "VRT", "MRVL"]
+}

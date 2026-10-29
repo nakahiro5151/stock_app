@@ -1,0 +1,15 @@
+{
+  "nav": 72.3,
+  "holdings": 83.11,
+  "net_debt": 10.81,
+  "nav_per_share": 12686.0,
+  "price": 5963.0,
+  "shares_mn": 5699.0,
+  "usdjpy": 162.39,
+  "ltv": null,
+  "as_of": "2026年6月末",
+  "source": "https://group.softbank/ir/stock/sotp",
+  "fetched_at": "2026-10-22 09:44:03",
+  "from_cache": false,
+  "error": null
+}
